@@ -9,7 +9,8 @@ using System.Security.Claims;
 namespace Presentation.Areas.Client
 {
     [Authorize]
-    [Route("[controller]/[action]")]
+    [Area("Client")]
+    [Route("[area]/[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

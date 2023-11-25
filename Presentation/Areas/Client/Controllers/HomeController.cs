@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace Presentation.Areas.Client
 {
+    [Area("Client")]
     public class HomeController : Controller
     {
         public IActionResult Index()

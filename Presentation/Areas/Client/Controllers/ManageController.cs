@@ -10,7 +10,8 @@ using System.Text.Encodings.Web;
 namespace Presentation.Areas.Client
 {
     [Authorize]
-    [Route("[controller]/[action]")]
+    [Area("Client")]
+    [Route("[area]/[controller]/[action]")]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
