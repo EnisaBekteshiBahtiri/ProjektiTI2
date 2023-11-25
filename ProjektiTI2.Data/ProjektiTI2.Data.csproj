@@ -9,7 +9,12 @@
   <ItemGroup>
     <Folder Include="Context\" />
     <Folder Include="Entities\" />
-    <Folder Include="Identity\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.23" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.23" />
   </ItemGroup>
 
 </Project>
