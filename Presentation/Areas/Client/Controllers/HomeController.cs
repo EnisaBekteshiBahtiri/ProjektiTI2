@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Presentation.Areas.Client.Models;
+using ProjektiTI2.App.Constants;
 using System.Diagnostics;
 
 namespace Presentation.Areas.Client
 {
     [Area("Client")]
+    [Authorize(Roles = RoleConstants.Client)]
     public class HomeController : Controller
     {
         public IActionResult Index()

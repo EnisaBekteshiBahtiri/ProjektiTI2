@@ -7,9 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjektiTI2.App\ProjektiTI2.App.csproj" />
     <ProjectReference Include="..\ProjektiTI2.Data\ProjektiTI2.Data.csproj" />
   </ItemGroup>
 

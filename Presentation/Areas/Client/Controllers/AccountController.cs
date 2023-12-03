@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Areas.Client.Models.AccountViewModels;
+using ProjektiTI2.App.Constants;
 using ProjektiTI2.Data.Identity;
 using System.Security.Claims;
 
@@ -15,16 +16,19 @@ namespace Presentation.Areas.Client
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger _logger;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -34,6 +38,12 @@ namespace Presentation.Areas.Client
         [AllowAnonymous]
         public async Task<IActionResult> Login(string? returnUrl = null)
         {
+            //IdentityRole identityRole = new IdentityRole("Client");
+            //var result = await _roleManager.CreateAsync(identityRole);
+
+            //IdentityRole identityRole2 = new IdentityRole("Admin");
+            //var result2 = await _roleManager.CreateAsync(identityRole2);
+
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
@@ -54,6 +64,20 @@ namespace Presentation.Areas.Client
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await _userManager.FindByEmailAsync(model.Email);
+                    IList<string>? roles = await _userManager.GetRolesAsync(user);
+
+                    var roleName = roles.FirstOrDefault();
+
+                    if (roleName == RoleConstants.Admin)
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    else if (roleName == RoleConstants.Client)
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Client" });
+                    }
+
                     _logger.LogInformation("User logged in.");
                     return RedirectToLocal(returnUrl);
                 }
@@ -214,7 +238,13 @@ namespace Presentation.Areas.Client
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var roleResult = await _userManager.AddToRoleAsync(user, RoleConstants.Client);
                     _logger.LogInformation("User created a new account with password.");
+                    if (roleResult.Succeeded)
+                    {
+                        _logger.LogInformation($"User created with role {RoleConstants.Client}");
+                    }
+
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");
