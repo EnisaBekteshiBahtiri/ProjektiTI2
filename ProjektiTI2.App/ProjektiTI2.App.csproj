@@ -9,16 +9,19 @@
   <ItemGroup>
     <Folder Include="Cache\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Implementations\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Mappers\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.23">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProjektiTI2.Data\ProjektiTI2.Data.csproj" />
   </ItemGroup>
 
 </Project>
