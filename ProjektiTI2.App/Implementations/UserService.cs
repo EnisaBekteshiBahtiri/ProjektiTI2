@@ -108,8 +108,7 @@ namespace ProjektiTI2.App.Implementations
 
             if (CurrentUser != null)
             {
-                return "";
-                //return CurrentUser.Name + " " + CurrentUser.Surname;
+                return CurrentUser.Name + " " + CurrentUser.Surname;
             }
             else
             {

@@ -22,7 +22,6 @@ namespace ProjektiTI2.Data.Context
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
 
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AspNetRole>(entity =>

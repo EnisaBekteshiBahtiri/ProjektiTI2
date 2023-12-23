@@ -17,17 +17,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektiTI2.App", "Projekti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektiTI2.Data", "ProjektiTI2.Data\ProjektiTI2.Data.csproj", "{CDD5CB10-10D6-423C-863B-C275962ACA86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektiTI2.Models", "ProjektiTI2.Models\ProjektiTI2.Models.csproj", "{27BF99A5-9E41-4E30-A958-9D2E1B1B14DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektiTI2.Models", "ProjektiTI2.Models\ProjektiTI2.Models.csproj", "{27BF99A5-9E41-4E30-A958-9D2E1B1B14DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektiTI2.Utilities", "ProjektiTI2.Utilities\ProjektiTI2.Utilities.csproj", "{E87081F1-3784-4C52-A085-6DBF4D83650A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjektiTI2.Utilities", "ProjektiTI2.Utilities\ProjektiTI2.Utilities.csproj", "{E87081F1-3784-4C52-A085-6DBF4D83650A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{8C70EF4B-8C5A-46E6-8DD3-F0E805F9F0DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{8C70EF4B-8C5A-46E6-8DD3-F0E805F9F0DC}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Schema", "Schema\Schema.sqlproj", "{3FC19553-F8A3-4595-950B-F932C81B79A4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scaffolding", "Scaffolding", "{D2819F75-E161-4637-9F22-77DA65C5D4EC}"
+	ProjectSection(SolutionItems) = preProject
+		Scaffolding.txt = Scaffolding.txt
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{5A8DB09E-EA01-4E60-84DA-AD983BE3F4C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject1", "TestProject1\TestProject1.csproj", "{5A8DB09E-EA01-4E60-84DA-AD983BE3F4C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
