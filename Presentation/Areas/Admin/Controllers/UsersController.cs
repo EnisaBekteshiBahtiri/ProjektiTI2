@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Presentation.Areas.Client.Controllers
+namespace Presentation.Areas.Admin.Controllers
 {
     public class UsersController : Controller
     {
