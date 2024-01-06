@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Areas.Client.Models.ManageViewModels;
+using ProjektiTI2.App.Constants;
 using ProjektiTI2.Data.Identity;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -10,7 +11,7 @@ using System.Text.Encodings.Web;
 namespace Presentation.Areas.Client
 {
     [Authorize]
-    [Area("Client")]
+    [Area(AreasConstants.Client)]
     [Route("[area]/[controller]/[action]")]
     public class ManageController : Controller
     {

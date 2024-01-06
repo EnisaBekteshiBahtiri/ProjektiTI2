@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjektiTI2.App.Constants;
 using ProjektiTI2.App.Interfaces;
 
 namespace Presentation.Areas.Admin.Controllers
 {
-    [Area("Admin")]
+    [Area(AreasConstants.Admin)]
     public class UsersController : Controller
     {
         private readonly IUserRepository userRepository;

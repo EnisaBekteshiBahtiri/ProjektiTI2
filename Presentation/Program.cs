@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using ProjektiTI2.App.Implementations;
 using ProjektiTI2.App.Interfaces;
 using ProjektiTI2.Data.Context;
 using ProjektiTI2.Data.Identity;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +60,67 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
     options.SlidingExpiration = true;
 });
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var en = new CultureInfo("en-US");
+    en.NumberFormat.NumberDecimalSeparator = ".";
+    en.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+    en.DateTimeFormat.LongTimePattern = "dd/MM/yyyy";
+    en.DateTimeFormat.ShortTimePattern = "HH:mm";
+    en.DateTimeFormat.LongTimePattern = "HH:mm";
+    var al = new CultureInfo("sq-AL");
+    al.DateTimeFormat.ShortDatePattern = "dd.MM.yyyy";
+    al.DateTimeFormat.LongTimePattern = "dd.MM.yyyy";
+    al.DateTimeFormat.ShortTimePattern = "HH:mm";
+    al.DateTimeFormat.LongTimePattern = "HH:mm";
+    al.NumberFormat.NumberDecimalSeparator = ".";
+
+    var supportedCultures = new[]
+    {
+        en,
+        al
+    };
+
+    options.DefaultRequestCulture = new RequestCulture(en, en);
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+});
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+    options.CheckConsentNeeded = context => false; // was true
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+
+builder.Services.Configure<CookieTempDataProviderOptions>(options =>
+{
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+    options.LoginPath = "/Client/Account/Login";
+    options.AccessDeniedPath = "/Client/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddLocalization(opts => { opts.ResourcesPath = "Resources"; });
+
+builder.Services.AddMvc()
+    .AddViewLocalization(
+        LanguageViewLocationExpanderFormat.Suffix,
+        opts => { opts.ResourcesPath = "Resources"; })
+    .AddDataAnnotationsLocalization();
 
 var app = builder.Build();
 
@@ -73,6 +138,12 @@ else
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+var supportedCultures = new[] { "en-US", "sq-AL" };
+var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
 app.UseRouting();
 
 app.MapControllerRoute(
@@ -81,6 +152,8 @@ app.MapControllerRoute(
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapRazorPages();
 
